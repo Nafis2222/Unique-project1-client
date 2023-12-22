@@ -1,13 +1,45 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "./Authprovider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const {userFinal,Logout} = useContext(AuthContext)
   const navlinks = <>
-        <li><NavLink to="/">Dashboard</NavLink></li>            
+        {
+          userFinal ?
+          <>
+          <li><NavLink to="/">Dashboard</NavLink></li>            
         <li><NavLink to="/">Contacts</NavLink></li>            
-        <li><NavLink to="/">About</NavLink></li>            
+        <li><NavLink to="/">About</NavLink></li>
+          </>
+           : 
+           <>
+           {/* <li><NavLink to="/">Dashboard</NavLink></li>             */}
+        <li><NavLink to="/">Contacts</NavLink></li>            
+        <li><NavLink to="/">About</NavLink></li>
+           </>
+        }
+                    
         {/* <li><NavLink></NavLink></li>             */}
 
           </>
+          const logout = () =>{
+            Logout ()
+            .then(res=>{
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Your have successfully loged out",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              console.log(res.user)
+            })
+            .catch(error=>{
+              console.log(error.message)
+            })
+          }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -30,7 +62,17 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to="/login" className="btn">Login</Link>
+    {
+      userFinal ?
+       <>
+           <Link onClick={logout} className="btn">LogOut</Link>
+      </> 
+      : 
+      <>
+          <Link to="/login" className="btn">Login</Link>
+
+      </>
+    }
   </div>
 </div>
         </div>
