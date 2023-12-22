@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
@@ -27,6 +28,9 @@ const Login = () => {
           <button className="btn btn-primary">Login</button>
         </div>
       </form>
+      <h1 className="text-center">Don't have account ? <Link to="/register" className="link link-info">Register</Link></h1>
+      <button className="btn btn-accent my-3 w-3/4 mx-auto">Continue with google</button>
+
     </div>
   </div>
 </div>
