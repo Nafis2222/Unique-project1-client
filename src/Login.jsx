@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./Authprovider";
 import Swal from "sweetalert2";
+import { setDriver } from "localforage";
 
 const Login = () => {
-    const {Login} = useContext(AuthContext)
+    const {Login, googleLog} = useContext(AuthContext)
+    const [Error,setError] = useState()
     const handleSubmit = e =>{
         e.preventDefault()
         const form = new FormData(e.currentTarget)
@@ -13,6 +15,7 @@ const Login = () => {
         console.log(email,password)
         Login(email,password)
         .then(res=>{
+            setError('')
             Swal.fire({
               position: "top-center",
               icon: "success",
@@ -21,6 +24,28 @@ const Login = () => {
               timer: 1500
             });
             console.log(res.user)
+        })
+        .catch(error=>{
+            setError(error.message)
+        })
+    }
+
+    const googleClick = () =>{
+        googleLog()
+        .then(res=>{
+            setDriver('')
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Your have successfully login with google",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            console.log(res.user)
+        })
+        .catch(error=>{
+            setError(error.message)
+            console.log(error.message)
         })
     }
     return (
@@ -50,8 +75,11 @@ const Login = () => {
           <button className="btn btn-primary">Login</button>
         </div>
       </form>
+      {
+        Error ? <><p className="text-center text-red-600"> {Error}</p></> : <></>
+      }
       <h1 className="text-center">Don't have account ? <Link to="/register" className="link link-info">Register</Link></h1>
-      <button className="btn btn-accent my-3 w-3/4 mx-auto">Continue with google</button>
+      <button onClick={googleClick} className="btn btn-accent my-3 w-3/4 mx-auto">Continue with google</button>
 
     </div>
   </div>
