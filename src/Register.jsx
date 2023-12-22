@@ -1,21 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./Authprovider";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const {createUser} = useContext(AuthContext)
+    const [Error,setError] = useState()
     const handleClick = e =>{
         e.preventDefault()
         const form = new FormData(e.currentTarget)
         const email = form.get('email')
         const password = form.get('password')
         console.log(email,password)
+        console.log(setError)
         createUser(email,password)
         .then(res=>{
+            setError('')
+            Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Your have successfully registered and logged-in",
+                showConfirmButton: false,
+                timer: 2500
+              });
             console.log(res.user)
         })
-        .then(error=>{
-            console.log(error)
+        .catch(error=>{
+            setError(error.message)
+            console.log(error.message)
         })
     }
     return (
@@ -26,7 +38,7 @@ const Register = () => {
     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
     <h1 className="text-5xl text-center font-bold">Register now!</h1>
 
-      <form onClick={handleClick} className="card-body">
+      <form onSubmit={handleClick} className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -43,9 +55,12 @@ const Register = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <Link  className="btn btn-primary">Register</Link>
+          <button  className="btn btn-primary">Register</button>
         </div>
       </form>
+      {
+        Error ? <><p className="text-center text-red-800 mb-1">{Error}</p></> : <></>
+      }
       <h1 className="text-center mb-3">Already have an account ? <Link to="/login" className="link link-info">Login</Link></h1>
 
     </div>
