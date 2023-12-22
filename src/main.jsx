@@ -9,6 +9,7 @@ import Basic from './Basic';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
+import Authprovider from './Authprovider';
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className='max-w-screen-lg mx-auto'>
-    <RouterProvider router={router} />
+      <Authprovider>
+      <RouterProvider router={router} />
+      </Authprovider>
     </div>
   </React.StrictMode>,
 )

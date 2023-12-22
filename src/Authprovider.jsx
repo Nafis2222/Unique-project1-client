@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import app from "./firebase.config";
 
 
-export AuthContext = createContext(null)
+export const AuthContext = createContext(null)
 
 const Authprovider = ({children}) => {
     const [userFinal, final] = useState()
