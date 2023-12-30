@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "./Authprovider";
 import Swal from "sweetalert2";
 import { setDriver } from "localforage";
+import Navbar from "./Navbar";
 
 const Login = () => {
     const {Login, googleLog} = useContext(AuthContext)
@@ -50,6 +51,7 @@ const Login = () => {
     }
     return (
         <div>
+            <Navbar></Navbar>
             <div className="hero min-h-screen bg-base-200">
   <div className="hero-content flex-col lg:flex-row-reverse">
     

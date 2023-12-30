@@ -10,6 +10,10 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Authprovider from './Authprovider';
+import DashBoard from './DashBoard';
+import None from './None';
+import AddTask from './AddTask';
+import PreviousTask from './PreviousTask';
 
 const router = createBrowserRouter([
   {
@@ -27,9 +31,32 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>
-      }
+      },
+      // {
+      //   path: "/dashBoard",
+      //   element: <DashBoard></DashBoard>
+      // },
+      // {
+      //   path: "/addTask",
+      //   element: <AddTask></AddTask>
+      // }
+     
     ]
   },
+  {
+    path : "dashBoard",
+    element: <DashBoard></DashBoard>,
+    children: [
+      {
+        path: "addTask",
+        element: <AddTask></AddTask>
+      },
+      {
+        path: "preTask",
+        element: <PreviousTask></PreviousTask>
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

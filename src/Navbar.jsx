@@ -9,7 +9,7 @@ const Navbar = () => {
         {
           userFinal ?
           <>
-          <li><NavLink to="/">Dashboard</NavLink></li>            
+          <li><NavLink to="/dashBoard">Dashboard</NavLink></li>            
         <li><NavLink to="/">Contacts</NavLink></li>            
         <li><NavLink to="/">About</NavLink></li>
           </>
@@ -30,7 +30,7 @@ const Navbar = () => {
               Swal.fire({
                 position: "top-center",
                 icon: "success",
-                title: "Your have successfully loged out",
+                title: "Your have successfully logged out",
                 showConfirmButton: false,
                 timer: 1500
               });
@@ -56,7 +56,7 @@ const Navbar = () => {
     <img className="w-20 h-12 rounded-full" src="https://i.ibb.co/2SvDFYq/download-25.jpg" alt="" />
   </div>
   <div className="navbar-start hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+    <ul className="menu menu-horizontal px-1"> 
      
 {navlinks}
     </ul>
